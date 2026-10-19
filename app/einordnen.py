@@ -60,12 +60,13 @@ def einordnen(mail: str, versuche: int = 3) -> Anfrage:
                 model=MODEL,
                 messages=nachricht,
                 temperature=0.0,
-                response_format=schema_von(Anfrage),
+                #response_format=schema_von(Anfrage),
             )
             inhalt = antwort.choices[0].message.content or ""
 
+            return inhalt
             # TODO 2: Validierung mittels Pydantic
-            return Anfrage.model_validate_json(inhalt)
+            #return Anfrage.model_validate_json(inhalt)
 
         except ValidationError as e:
             # TODO 3: Fehlversuch abfangen und Meldung ausgeben
@@ -76,6 +77,13 @@ def einordnen(mail: str, versuche: int = 3) -> Anfrage:
                 ) from e
     #---------------------------------------------------------------------------------  
     raise NotImplementedError("TODO: einordnen() umsetzen")
+
+def fragen():
+    with open("mails.json", encoding="utf-8") as f:
+            faelle = json.load(f)
+    for fall in faelle:
+        ergebnis = einordnen(fall["mail"])
+        print(ergebnis)
 
 
 def auswerten() -> None:
@@ -108,4 +116,5 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         print(einordnen(" ".join(sys.argv[1:])).model_dump_json(indent=2))
     else:
-        auswerten()
+        #auswerten()
+        fragen()
