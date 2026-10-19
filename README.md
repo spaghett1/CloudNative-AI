@@ -71,6 +71,10 @@ qwen2.5: 2 von 8 richtig eingeordnet.
 3. Halluzination werden durchgelassen, da das Schema nur das Format prueft und nicht de Fakten.
 "null" statt None wird durchgelassen da Json nur "null" als einzigen nicht-wert hat
 
-4.
-Die ausgaben sind sehr inkonsistent. Das Modell beantwortet eher die als Frage gestellten Mails, als die Mails einzuordnen, aber versucht weitesgehend, den system prompt einzuhalten. die antwort ist immer json und die kategorie frist ist immer in diesem json enthalten. die anderen kategorien sind aber falsch oder gar nicht enthalten.
+4. Keines der Modelle laesst sich umleiten durch die Prompt injection, sie versuchen dennoch, den prompt wie eine email zu behandeln und das anliegen daraus zu extrahieren.
 
+
+5.
+Die ausgaben sind sehr inkonsistent. Das Modell beantwortet eher die als Frage gestellten Mails, als die Mails einzuordnen, aber versucht weitesgehend, den system prompt einzuhalten. die antwort ist immer json und die kategorie frist ist immer in diesem json enthalten. die anderen kategorien sind aber falsch oder gar nicht enthalten.
+Bei der letzten Email mit der prompt injection lauft das programm nicht weiter, bzw steckt in einem loop fest.
+Temperature beim Retry erhoehen
