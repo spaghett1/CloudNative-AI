@@ -1,10 +1,21 @@
 # CloudNative-AI
 Abgaben im Fach CloudeNative-AI.
 
+**Name und Matrikelnummer in Moodle!**
+
+1. Docker installieren(https://docs.docker.com/engine/install/)(https://docs.docker.com/desktop/setup/install/windows-install/)
+
+2. Git-Repository anlegen und das Start-Projekt einfügen.
+
+3. docker compose up --build app ausführen.
+
+4. Es wir die .env benötigt, die mitgeliefert wird in starter.zip
+5. zum starten, docker run --rm 'hallo_llm.py' "prompt"
+
 
 Abgabe 1:
 
-Teil 1 - Setup und erster Modellaufruf 
+**Teil 1** - Setup und erster Modellaufruf 
 
 1. Im Setup laufen drei definierte Container: ollama, modell-laden und app.
 Ollama ist der zentrale LLM-Container, modell-laden ist zum vorab-herunterladen der Modelle, app ist der eigentliche python container, der nach app-laden startet.
@@ -20,7 +31,7 @@ Die Anwendung findet das Modell ueber das interne Docker-Netzwerk unter ollama:1
 | Wieviele Studierende hat die Hochschule | llama3.2 | 208 | 1149 | ja |
 | - | qwen 2.5 | 108 | 736 | nein |
 
-Teil 2 - Modell austauschen
+**Teil 2** - Modell austauschen
 
 2. 
 Antwort llama3.2: 
@@ -29,7 +40,7 @@ Die Hochschule für Technologie, Wirtschaft und Geisteswissenschaften (HTWG) Kon
 Antwort qwen2.5: 
 Das HTWG Konzert ist nicht privater oder staatliche Hochschule. Es stellt sich an auf die Entwicklung eines hochintensiv anstehenden Forschungszentrums in der Bildungskommunikation und Kulturalleitgestaltung zusammen.
 
-Teil 3 - Sampling und Tokens messen
+**Teil 3** - Sampling und Tokens messen
 1.
 Temperature 0: 5x dieselbe Antwort
 Temperature 0.7: 5 verschiedene Antworten 
@@ -60,15 +71,15 @@ Deutscher Text: Entspricht das   Informatikprüfungsordnungsdokument der HTWG Ko
 Englischer Text: Does the document outlining the computer science examination regulations at HTWG Konstanz comply with the guidelines of the Higher Education Examination Administration?
 => kleinerer Unterschied: 10 tokens mehr (+ 20%)
 
-Teil 4 - Anfragen strukturiert einordnen
+**Teil 4** - Anfragen strukturiert einordnen
 
 1.
 llama3.2: 7 von 8 richtig eingeordnet.
 qwen2.5: 2 von 8 richtig eingeordnet.
 
-2. Wir hatten Fehler im Anliegen als auch falscher Studiengang sowie Frist
+2. Wir hatten Fehler im Anliegen als auch falscher Studiengang sowie Frist, aber es wechselt ständig.
 
-3. Halluzination werden durchgelassen, da das Schema nur das Format prueft und nicht de Fakten.
+3. Halluzination werden durchgelassen, da das Schema nur das Format prueft und nicht die Fakten.
 "null" statt None wird durchgelassen da Json nur "null" als einzigen nicht-wert hat
 
 4. Keines der Modelle laesst sich umleiten durch die Prompt injection, sie versuchen dennoch, den prompt wie eine email zu behandeln und das anliegen daraus zu extrahieren.
@@ -78,3 +89,19 @@ qwen2.5: 2 von 8 richtig eingeordnet.
 Die ausgaben sind sehr inkonsistent. Das Modell beantwortet eher die als Frage gestellten Mails, als die Mails einzuordnen, aber versucht weitesgehend, den system prompt einzuhalten. die antwort ist immer json und die kategorie frist ist immer in diesem json enthalten. die anderen kategorien sind aber falsch oder gar nicht enthalten.
 Bei der letzten Email mit der prompt injection lauft das programm nicht weiter, bzw steckt in einem loop fest.
 Temperature beim Retry erhoehen
+
+**Teil 5:**
+1. Warum steht das Modell in .env und nicht im Code?
+   Das Modell kann man so einfach in der .env ändern ohne den Code zu verändern.
+2. Welche Temperature habt ihr in einordnen.py gewählt, und warum?
+   Temperature 0, weil die Antworten konsistent sein müssen für die Auswertung.
+3. Was garantiert response_format mit Schema, und was nicht?
+   ein JSON ist dadurch garantiert und es werden nur die 4 Werte ausgewertet. Der Inhalt wird aber nicht garantiert.
+   Dadurch können Werte wie "NULL" vorkommen. Bei uns hat der System_promt ein immer JSON erzeugt.
+4. Wann würdet ihr ein lokales Modell, wann einen Cloud-Dienst wählen? Nennt je zwei Gründe.
+   pro lokal:
+   - Bei Auswertungen die nicht viel Rechenleistung ziehen, wie die E-Mails.
+   - Wenn mit sensiblen Daten gearbeitet wird.
+   pro Cloud:
+   - für bessere Antworten, weil es ein großeres Neuronales-Netz hat
+   - Modelle müssen nicht gedownloaded werden.
