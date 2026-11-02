@@ -60,7 +60,7 @@ def einordnen(mail: str, versuche: int = 3) -> Anfrage:
                 model=MODEL,
                 messages=nachricht,
                 temperature=0.0,
-                response_format=schema_von(Anfrage),
+                #response_format=schema_von(Anfrage),
             )
             inhalt = antwort.choices[0].message.content or ""
 
