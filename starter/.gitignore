@@ -1,0 +1,5 @@
+.env
+__pycache__/
+# Teil 4: Checkpoints und Langzeit-Memory enthalten eure Unterhaltungen
+sitzungen/
+memory.json

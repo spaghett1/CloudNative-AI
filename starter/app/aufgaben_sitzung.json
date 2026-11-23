@@ -1,0 +1,26 @@
+[
+  {"name": "raum_von_vorhin", "typ": "kurzzeit", "sitzungen": [[
+    {"frage": "Ist O-108 am Freitag um 14 Uhr frei?", "werkzeuge": ["raum_frei"], "erwartet": ["frei"], "nicht_erwartet": ["belegt", "nicht frei"]},
+    {"frage": "Super, dann buch mir den Raum von vorhin für 14 Uhr, für die Lerngruppe Kim.", "werkzeuge": ["raum_buchen"], "erwartet": ["gebucht", "Buchung", "reserviert"]}
+  ]]},
+  {"name": "mensa_folgefrage", "typ": "kurzzeit", "sitzungen": [[
+    {"frage": "Was gibt es am Donnerstag in der Mensa?", "werkzeuge": ["mensa_speiseplan"], "erwartet": ["Gemüsepfanne", "Pizza", "Fisch"]},
+    {"frage": "Und welches davon ist vegan?", "werkzeuge": [], "erwartet": ["Gemüsepfanne", "Tofu"]}
+  ]]},
+  {"name": "campuskarte_folgefrage", "typ": "kurzzeit", "sitzungen": [[
+    {"frage": "Was kostet eine Ersatzkarte, wenn ich meine Campuskarte verloren habe?", "werkzeuge": ["suche_wissen"], "erwartet": ["15"]},
+    {"frage": "Und wo hole ich sie dann ab?", "werkzeuge": [], "erwartet": ["A-010", "Studierendensekretariat"]}
+  ]]},
+  {"name": "vegetarisch", "typ": "langzeit", "sitzungen": [
+    [{"frage": "Ich esse vegetarisch. Bitte merk dir das.", "werkzeuge": ["merken"], "erwartet": []}],
+    [{"frage": "Was kann ich morgen in der Mensa essen?", "werkzeuge": ["mensa_speiseplan"], "erwartet": ["Falafel", "Käsespätzle"], "nicht_erwartet": ["Hähnchen"]}]
+  ]},
+  {"name": "lerngruppe", "typ": "langzeit", "sitzungen": [
+    [{"frage": "Ich bin in der Lerngruppe Mathe. Merk dir das bitte für später.", "werkzeuge": ["merken"], "erwartet": []}],
+    [{"frage": "Buche mir F-012 am Freitag um 9:45 Uhr für meine Lerngruppe.", "werkzeuge": ["raum_buchen"], "erwartet": ["Mathe"]}]
+  ]},
+  {"name": "name", "typ": "langzeit", "sitzungen": [
+    [{"frage": "Hallo, ich heiße Kim Weber.", "werkzeuge": ["merken"], "erwartet": []}],
+    [{"frage": "Wie heiße ich?", "werkzeuge": [], "erwartet": ["Kim"]}]
+  ]}
+]
